@@ -3,6 +3,8 @@ import 'package:aula/widget/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../dao/favoriteDao.dart';
+
 class BookView extends StatefulWidget {
   const BookView({super.key});
 
@@ -11,6 +13,9 @@ class BookView extends StatefulWidget {
 }
 
 class _BookViewState extends State<BookView> {
+
+  bool _isFavorite = false;
+
   Container _buildCard(String url) {
     return Container(
       margin: const EdgeInsets.only(left: 30, right: 30),
@@ -68,7 +73,9 @@ class _BookViewState extends State<BookView> {
       onPressed: () {
         //TODO
       },
-      child: const Icon(Ionicons.bookmark_outline, size: 17),
+      child: _isFavorite ?
+      const Icon(Ionicons.bookmark_outline, size: 17) :
+      const Icon(Ionicons.bookmark_sharp, size: 17),
     );
   }
 
@@ -148,6 +155,9 @@ class _BookViewState extends State<BookView> {
   @override
   Widget build(BuildContext context) {
     final Book book = ModalRoute.of(context)!.settings.arguments as Book;
+    FavoriteDao().findById(book.id as int).then((value) {
+      if (value.id != null) _isFavorite = true;
+    });
 
     return Scaffold(
       appBar: appBarBookTracker(true, false, '', context),

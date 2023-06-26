@@ -46,7 +46,7 @@ class _FavoriteState extends State<Favorite> {
                       });
                     },
                     backgroundColor: const Color(0xfff1eee3),
-                    child: const Icon(Ionicons.bookmark_outline, size: 17),
+                    child: const Icon(Ionicons.bookmark_sharp, size: 17),
                   ),
                 ),
               ),
