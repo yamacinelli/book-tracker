@@ -12,7 +12,8 @@ class BookView extends StatefulWidget {
 class _BookViewState extends State<BookView> {
   SizedBox _buildCard(String url) {
     return SizedBox(
-      width: 160.0,
+      width: 140.0,
+      height: 190.0,
       child: Column(
         children: [
           SizedBox(
@@ -39,9 +40,12 @@ class _BookViewState extends State<BookView> {
     return Text(
       name,
       style: const TextStyle(
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      softWrap: false,
     );
   }
 
@@ -49,40 +53,38 @@ class _BookViewState extends State<BookView> {
     return Text(
       author,
       style: const TextStyle(
-        fontSize: 10,
+        fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
     );
   }
 
   Widget _buildMainInformationBook(Book book) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _bookName(book.name),
-        _bookAuthor(book.author),
-      ],
+    return SizedBox(
+      width: 200.0,
+      height: 190.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _bookName(book.name),
+          _bookAuthor(book.author),
+        ],
+      ),
     );
   }
 
   Row _buildTopPage(Book book) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildCard(book.imageUrl),
-        _buildMainInformationBook(book)
-      ],
+      children: [_buildCard(book.imageUrl), _buildMainInformationBook(book)],
     );
   }
-
-  // Row _buildRowBottom() {}
 
   Widget _buildBody(Book book) {
     return Column(
       children: [
         _buildTopPage(book),
-        // _buildRowBottom(),
       ],
     );
   }
