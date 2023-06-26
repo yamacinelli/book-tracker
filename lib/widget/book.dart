@@ -1,19 +1,99 @@
+import 'package:aula/model/book.dart';
+import 'package:aula/widget/appBar.dart';
 import 'package:flutter/material.dart';
 
-class Book extends StatefulWidget {
-  const Book({super.key});
+class BookView extends StatefulWidget {
+  const BookView({super.key});
 
   @override
-  State<Book> createState() => _BookState();
+  State<BookView> createState() => _BookViewState();
 }
 
-class _BookState extends State<Book> {
+class _BookViewState extends State<BookView> {
+  SizedBox _buildCard(String url) {
+    return SizedBox(
+      width: 160.0,
+      child: Column(
+        children: [
+          SizedBox(
+            width: 120,
+            height: 170,
+            child: Card(
+              elevation: 5.0,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ClipRRect(
+                    child: Image.network(url, fit: BoxFit.fill),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Text _bookName(String name) {
+    return Text(
+      name,
+      style: const TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Text _bookAuthor(String author) {
+    return Text(
+      author,
+      style: const TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _buildMainInformationBook(Book book) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _bookName(book.name),
+        _bookAuthor(book.author),
+      ],
+    );
+  }
+
+  Row _buildTopPage(Book book) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildCard(book.imageUrl),
+        _buildMainInformationBook(book)
+      ],
+    );
+  }
+
+  // Row _buildRowBottom() {}
+
+  Widget _buildBody(Book book) {
+    return Column(
+      children: [
+        _buildTopPage(book),
+        // _buildRowBottom(),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Book book = ModalRoute.of(context)!.settings.arguments as Book;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Book: name-book'),
-      ),
+      appBar: appBarBookTracker(true, false, '', context),
+      body: _buildBody(book),
     );
   }
 }

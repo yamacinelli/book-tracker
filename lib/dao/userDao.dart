@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:aula/constant/enviroment.dart';
 import 'package:aula/dao/database/sqlite/connection.dart';
 import 'package:aula/dao/genericDao.dart';
 import 'package:aula/model/user.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:http/http.dart' as http;
 
 class UserDao implements GenericDao<User> {
 

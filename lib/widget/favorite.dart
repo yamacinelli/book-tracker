@@ -1,3 +1,4 @@
+import 'package:aula/constant/constants.dart';
 import 'package:aula/dao/favoriteDao.dart';
 import 'package:aula/widget/bottomNavigationBarState.dart';
 import 'package:flutter/material.dart';
@@ -18,34 +19,39 @@ class _FavoriteState extends State<Favorite> {
     return SizedBox(
       width: 90,
       height: 130,
-      child: Card(
-        elevation: 5.0,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            ClipRRect(
-              child: Image.network(book.imageUrl, fit: BoxFit.fill),
-            ),
-            Align(
-              alignment: AlignmentDirectional.topEnd,
-              child: Container(
-                height: 30,
-                width: 30,
-                padding: const EdgeInsets.only(top: 5, right: 5),
-                child: FloatingActionButton(
-                  heroTag: 'btn$index',
-                  onPressed: () {
-                    // Remove item of list Favorites
-                    setState(() {
-                      FavoriteDao().delete(book);
-                    });
-                  },
-                  backgroundColor: const Color(0xfff1eee3),
-                  child: const Icon(Ionicons.bookmark_outline, size: 17),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, Constants.ROUTE_BOOK, arguments: book);
+        },
+        child: Card(
+          elevation: 5.0,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              ClipRRect(
+                child: Image.network(book.imageUrl, fit: BoxFit.fill),
+              ),
+              Align(
+                alignment: AlignmentDirectional.topEnd,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  padding: const EdgeInsets.only(top: 5, right: 5),
+                  child: FloatingActionButton(
+                    heroTag: 'btn$index',
+                    onPressed: () {
+                      // Remove item of list Favorites
+                      setState(() {
+                        FavoriteDao().delete(book);
+                      });
+                    },
+                    backgroundColor: const Color(0xfff1eee3),
+                    child: const Icon(Ionicons.bookmark_outline, size: 17),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

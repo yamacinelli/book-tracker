@@ -26,7 +26,7 @@ class App extends StatelessWidget {
         'home': (context) => Home(),
         'favorite': (context) => Favorite(),
         'account': (context) => Account(),
-        'book': (context) => Book(),
+        'book': (context) => BookView(),
         'buy': (context) => Buy(),
         'reading': (context) => Read(),
         'discover': (context) => Discover(),
