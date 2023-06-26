@@ -1,6 +1,7 @@
 import 'package:aula/model/book.dart';
 import 'package:aula/widget/appBar.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class BookView extends StatefulWidget {
   const BookView({super.key});
@@ -10,10 +11,9 @@ class BookView extends StatefulWidget {
 }
 
 class _BookViewState extends State<BookView> {
-  SizedBox _buildCard(String url) {
-    return SizedBox(
-      width: 140.0,
-      height: 190.0,
+  Container _buildCard(String url) {
+    return Container(
+      margin: const EdgeInsets.only(left: 30, right: 30),
       child: Column(
         children: [
           SizedBox(
@@ -49,27 +49,83 @@ class _BookViewState extends State<BookView> {
     );
   }
 
-  Text _bookAuthor(String author) {
-    return Text(
-      author,
-      style: const TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.bold,
+  Padding _bookAuthor(String author) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Text(
+        author,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
 
-  Widget _buildMainInformationBook(Book book) {
-    return SizedBox(
-      width: 200.0,
-      height: 190.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _bookName(book.name),
-          _bookAuthor(book.author),
-        ],
+  FloatingActionButton _buttonFavorite() {
+    return FloatingActionButton.small(
+      heroTag: 'btnFavorite',
+      onPressed: () {
+        //TODO
+      },
+      child: const Icon(Ionicons.bookmark_outline, size: 17),
+    );
+  }
+
+  FloatingActionButton _buttonShare() {
+    return FloatingActionButton.small(
+      heroTag: 'btnShare',
+      onPressed: () {
+        //TODO
+      },
+      child: const Icon(Ionicons.share_social_outline, size: 17),
+    );
+  }
+
+  ElevatedButton _buttonStartRead() {
+    return ElevatedButton(
+      onPressed: () {
+        //TODO
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        fixedSize: const Size.fromWidth(100),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10)),
+      ),
+      child: const Text(
+        'Começar',
+        style: TextStyle(color: Colors.white, fontSize: 13),
+      ),
+    );
+  }
+
+  Container _buildActionButtons() {
+    return Container(
+      padding: const EdgeInsets.only(top: 20),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buttonStartRead(),
+            _buttonFavorite(),
+            _buttonShare(),
+          ]
+      ),
+    );
+  }
+
+  Expanded _buildMainInformationBook(Book book) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(right: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _bookName(book.name),
+            _bookAuthor(book.author),
+            _buildActionButtons(),
+          ],
+        ),
       ),
     );
   }
