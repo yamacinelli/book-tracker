@@ -5,4 +5,11 @@ class Book {
   String author;
   String name;
   String imageUrl;
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'author': author,
+    'name': name,
+    'imageUrl': imageUrl,
+  };
 }

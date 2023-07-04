@@ -1,14 +1,14 @@
+import 'package:aula/model/people.dart';
+
 class User {
   User(
       {this.id,
-      required this.name,
-      required this.lastName,
+      required this.people,
       required this.email,
       required this.password});
 
   int? id;
-  String name;
-  String lastName;
+  People? people;
   String email;
   String password;
 
@@ -16,6 +16,6 @@ class User {
         'id': id,
         'email': email,
         'password': password,
-        'people': {'name': name, 'lastName': lastName}
+        'people': people
       };
 }

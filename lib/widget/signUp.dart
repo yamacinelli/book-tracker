@@ -1,7 +1,7 @@
 import 'package:aula/dao/userDao.dart';
 import 'package:aula/model/people.dart';
 import 'package:aula/model/user.dart';
-import 'package:aula/service/user.service.dart';
+import 'package:aula/service/userService.dart';
 import 'package:aula/widget/appBar.dart';
 import 'package:flutter/material.dart';
 

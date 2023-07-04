@@ -67,11 +67,14 @@ class _BookViewState extends State<BookView> {
     );
   }
 
-  FloatingActionButton _buttonFavorite() {
+  FloatingActionButton _buttonFavorite(Book book) {
     return FloatingActionButton.small(
       heroTag: 'btnFavorite',
       onPressed: () {
-        //TODO
+        // Remove item of Favorites
+        setState(() {
+          FavoriteDao().delete(book);
+        });
       },
       child: _isFavorite ?
       const Icon(Ionicons.bookmark_outline, size: 17) :
@@ -107,14 +110,14 @@ class _BookViewState extends State<BookView> {
     );
   }
 
-  Container _buildActionButtons() {
+  Container _buildActionButtons(Book book) {
     return Container(
       padding: const EdgeInsets.only(top: 20),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buttonStartRead(),
-            _buttonFavorite(),
+            _buttonFavorite(book),
             _buttonShare(),
           ]
       ),
@@ -130,7 +133,7 @@ class _BookViewState extends State<BookView> {
           children: [
             _bookName(book.name),
             _bookAuthor(book.author),
-            _buildActionButtons(),
+            _buildActionButtons(book),
           ],
         ),
       ),

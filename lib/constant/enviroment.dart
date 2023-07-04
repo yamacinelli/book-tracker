@@ -1,3 +1,3 @@
 class Enviroment {
-  static const DEVELOPER = '172.21.101.114:8080';
+  static const DEVELOPER = 'http://192.168.1.88:8080';
 }

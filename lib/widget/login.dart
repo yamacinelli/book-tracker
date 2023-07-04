@@ -1,6 +1,6 @@
 import 'package:aula/constant/constants.dart';
-import 'package:aula/dao/userDao.dart';
 import 'package:aula/model/user.dart';
+import 'package:aula/service/userService.dart';
 import 'package:aula/widget/gradientBookTracker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
@@ -45,7 +45,7 @@ class LoginState extends State<LoginStateful> {
 
   Future<User> _getUserByCredentials() async {
     setState(() {});
-    return await UserDao().findByCredentials(_controllerEmail.text, _controllerPassword.text);
+    return await UserService().findByCredentials(_controllerEmail.text, _controllerPassword.text);
   }
 
   @override
