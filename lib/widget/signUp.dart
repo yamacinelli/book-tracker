@@ -1,5 +1,7 @@
 import 'package:aula/dao/userDao.dart';
+import 'package:aula/model/people.dart';
 import 'package:aula/model/user.dart';
+import 'package:aula/service/user.service.dart';
 import 'package:aula/widget/appBar.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +37,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   void submit() async {
-    UserDao().save(User(name: controllerName.text, lastName: controllerLastName.text, email: controllerEmail.text, password: controllerPassword.text));
+    UserService().save(User(people: People(name: controllerName.text, lastName: controllerLastName.text), email: controllerEmail.text, password: controllerPassword.text));
   }
 
   Widget _buildBody(BuildContext context) {
